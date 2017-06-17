@@ -26,8 +26,7 @@ public class StockSimulator {
             double simResult=portfolio.getInitialMoney();
             for(int n=0;n<portfolio.getPeriod();n++){
                 double r = simulator.nextSampleReturn();
-                simResult = (1+r)*simResult;
-                simResult = (1-inflation)*simResult;
+                simResult = (1+r-inflation)*simResult;
             }
             simulator.saveSimulationResult(simResult);
         }
@@ -59,7 +58,7 @@ public class StockSimulator {
     public void printSimulationResult(){
         System.out.println("Simulated " + portfolio + " " + simulations + " times with " + inflation + " inflation get returns: \n"
                 + "Median=" + simulator.getPercentile(50) + "\n"
-                + "10% Best=" + simulator.getPercentile(10) + "\n"
-                + "10% Worst=" + simulator.getPercentile(90));
+                + "10% Best=" + simulator.getPercentile(90) + "\n"
+                + "10% Worst=" + simulator.getPercentile(10));
     }
 }
